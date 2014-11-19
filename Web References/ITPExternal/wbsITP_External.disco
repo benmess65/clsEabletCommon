@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx?wsdl" docRef="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx" xmlns:q1="http://scms.silcar.com.au/" binding="q1:wbsITP_ExternalSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx" xmlns:q2="http://scms.silcar.com.au/" binding="q2:wbsITP_ExternalSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

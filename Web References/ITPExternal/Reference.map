@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx?wsdl" filename="wbsITP_External.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://silcar-ws11.silcar.com.au:8003/wbsITP_External.asmx?disco" filename="wbsITP_External.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

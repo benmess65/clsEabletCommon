@@ -1,0 +1,9 @@
+C:\Development\TabletCommon\clsTabletCommon\bin\Release\clsTabletCommon.dll
+C:\Development\TabletCommon\clsTabletCommon\bin\Release\clsTabletCommon.pdb
+C:\Development\TabletCommon\clsTabletCommon\bin\Release\clsTabletCommon.clsTabletCommon.apk
+C:\Development\TabletCommon\clsTabletCommon\bin\Release\clsTabletCommon.clsTabletCommon-Signed.apk
+C:\Development\TabletCommon\clsTabletCommon\obj\Release\clsTabletCommon.dll
+C:\Development\TabletCommon\clsTabletCommon\obj\Release\clsTabletCommon.pdb
+C:\Development\TabletCommon\clsTabletCommon\obj\Release\android\bin\clsTabletCommon.clsTabletCommon.apk
+C:\Development\TabletCommon\clsTabletCommon\obj\Release\R.cs.flag
+C:\Development\TabletCommon\clsTabletCommon\obj\Release\uploadflags.txt
