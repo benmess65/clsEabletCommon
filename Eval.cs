@@ -344,18 +344,33 @@ namespace appBusinessFormBuilder
 		{
 			double result = default(double);
             string sResult = "";
+            clsLocalUtils utils = new clsLocalUtils();
+            double dParam = 0.0;
 
 			// Parse function parameters
-//			List<double> parameters = ParseParameters(parser);
+			List<double> parameters = new List<double>();
             List<string> paramsstring = ParseParametersString(parser);
 
 			// We found a function reference
 			FunctionStatus status = FunctionStatus.UndefinedFunction;
 			if (ProcessFunction != null)
 			{
+                for (int i = 0; i < paramsstring.Count; i++)
+                {
+                    if (utils.IsNumeric(paramsstring[i]))
+                    {
+                        dParam = Convert.ToDouble(paramsstring[i]);
+                    }
+                    else
+                    {
+                        dParam = 0.0;
+                    }
+
+                    parameters.Add(dParam);
+                }
 				FunctionEventArgs args = new FunctionEventArgs();
 				args.Name = name;
-//				args.Parameters = parameters;
+				args.Parameters = parameters;
                 args.ParametersString = paramsstring;
 				args.Result = result;
                 args.ResultString = result.ToString();
@@ -521,7 +536,8 @@ namespace appBusinessFormBuilder
                 string expression = parser.Extract(paramStart, parser.Position);
                 if (expression.Contains("'"))
                 {
-                    return expression;
+                    string sRtn = expression.Replace("'", "");
+                    return sRtn;
                 }
                 return Execute(expression).ToString();
             }
