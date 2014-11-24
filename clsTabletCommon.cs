@@ -246,6 +246,7 @@ namespace appBusinessFormBuilder
                                     1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123,
                                     1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223,
                                     1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321, 1322, 1323, 1324,
+                                    1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413, 1414, 1415, 1416, 1417, 1418, 1419, 1420, 1421, 1422, 1423, 1424,
                                     1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1519, 1520, 1521, 1522, 1523, 1524, 1525, 1526, 1527
                                   };
 
@@ -262,6 +263,7 @@ namespace appBusinessFormBuilder
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11
                                            };
@@ -281,6 +283,7 @@ namespace appBusinessFormBuilder
                                           2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, //This is a textbox
                                           3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, //This is a textarea
                                           4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4, //This is a dropdown
+                                          5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5, //This is a checkbox
                                           6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6 //This is a radio group
                                         };
             string[] sParameterNames = {"FormSQL", "FormAutoSave", 
@@ -297,6 +300,7 @@ namespace appBusinessFormBuilder
                                          "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
                                          "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
                                          "BoundColumn", "DropdownSQL", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
+                                         "BoundColumn", "CheckBoxLabel", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnClick",
                                          "BoundColumn", "Value", "ItemLabels", "ItemValues", "Orientation", "HighlightColor", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange"
                                        };
             string[] sParameterDescriptions = { "SQL or Query", "AutoSave", 
@@ -313,6 +317,7 @@ namespace appBusinessFormBuilder
                                                 "Bound Column", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
                                                 "Bound Column", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
                                                 "Bound Column", "Dropdown SQL", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
+                                                "Bound Column", "Label", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnClick",
                                                 "Bound Column", "Value", "Item Labels", "Item Values", "Orientation", "Highlight Color", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Radio Group Align", "Radio Group Vertical Alignment", "Radio Group Padding Left", "Radio Group Padding Right", "Radio Group Padding Top", "Radio Group Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange"
                                               };
             //This parameter type is to how this line will show in the detail popup. Most cases will be a textbox or a drop down
@@ -330,6 +335,7 @@ namespace appBusinessFormBuilder
                                       400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
                                       400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
                                       400, 2, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
+                                      400, 2, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
                                       400, 2, 2, 2, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2
                                     };
             int[] iVersionAvailable = { 0, 0, 
@@ -346,6 +352,7 @@ namespace appBusinessFormBuilder
                                         0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                                       };
             int[] iParameterOrder = { 1, 2,  
@@ -362,6 +369,7 @@ namespace appBusinessFormBuilder
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27
                                     };
             string[] sDropdownSQL = { "", "Yes;No", 
@@ -377,6 +385,7 @@ namespace appBusinessFormBuilder
                                       "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px", "select Color from tblColors", 
                                       "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
                                       "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
+                                      "", "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
                                       "", "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
                                       "", "", "", "", "Horizontal;Vertical", "select Color from tblColors", "select Color from tblColors","", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","",""   
                                     };
@@ -395,6 +404,7 @@ namespace appBusinessFormBuilder
                                        "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "", 
                                        "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "", 
                                        "", "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "",
+                                       "", "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "", 
                                        "", "", "", "", "Horizontal", "Yellow", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", ""
                                      };
 
@@ -411,6 +421,7 @@ namespace appBusinessFormBuilder
                                  "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                                  "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
                                  "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
+                                 "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
                                  "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
                                  "", "", "CheckRadioItems(this)", "CheckRadioItems(this)", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);"
                                 };
