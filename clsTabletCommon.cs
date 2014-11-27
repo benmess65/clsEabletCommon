@@ -136,7 +136,7 @@ namespace appBusinessFormBuilder
         public class GridUtils
         {
             enum SectionType { Form = 1, Header, Detail, Footer, HeaderRow, HeaderColumn, DetailRow, DetailColumn, FooterRow, FooterColumn, GridItem };
-            enum ItemType { Label = 1, TextBox, TextArea, DropDown, Checkbox, RadioButton, Button, DatePicker, TimePicker, ProgressBar, ColumnHeader, RowHeader, ColumnDetail, RowDetail, ColumnFooter, RowFooter };
+            enum ItemType { Label = 1, TextBox, TextArea, DropDown, Checkbox, RadioButton, Button, DatePicker, TimePicker, Image, ColumnHeader, RowHeader, ColumnDetail, RowDetail, ColumnFooter, RowFooter };
             enum VersionType { Free = 0, Base, Pro, Premium };
 
             LocalDB DB = new LocalDB();
@@ -150,7 +150,7 @@ namespace appBusinessFormBuilder
             string[] sColumnsTable4 = { "ID", "FormId", "SectionId", "ItemType", "RowId", "ColumnId", "ItemId" }; //tblGridItems
             string[] sColumnsTable5 = { "ID", "Description" }; //tblItemType
             string[] sColumnsTable6 = { "ID", "FormId", "ItemId", "SectionType", "ParameterId", "ParameterValue" }; //tblItemAttributes
-            string[] sColumnsTable7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur" }; //tblParameters
+            string[] sColumnsTable7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur", "ExtraButton" }; //tblParameters
             string[] sColumnsTable8 = { "ID", "Description", "MonthlyFee", "YearlyFee" }; //tblVersionType
             string[] sColumnsTable9 = { "ID", "Color"}; //tblColors
 
@@ -161,7 +161,7 @@ namespace appBusinessFormBuilder
             string[] sColumnsTableNoAutoId4 = { "FormId", "SectionId", "ItemType", "RowId", "ColumnId", "ItemId" }; //tblGridItems
             string[] sColumnsTableNoAutoId5 = { "ID", "Description" }; //tblItemType
             string[] sColumnsTableNoAutoId6 = { "FormId", "ItemId", "SectionType", "ParameterId", "ParameterValue" }; //tblItemAttributes
-            string[] sColumnsTableNoAutoId7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur" }; //tblParameters
+            string[] sColumnsTableNoAutoId7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur", "ExtraButton" }; //tblParameters
             string[] sColumnsTableNoAutoId8 = { "ID", "Description", "MonthlyFee", "YearlyFee" }; //tblVersionType
             string[] sColumnsTableNoAutoId9 = { "Color" }; //tblColors
 
@@ -172,7 +172,7 @@ namespace appBusinessFormBuilder
             string[] sTypesTable4 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[int] NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[int] NULL" };
             string[] sTypesTable5 = { "[int] NULL", "[nvarchar](50) NULL" };
             string[] sTypesTable6 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[int] NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](1000) NULL" };
-            string[] sTypesTable7 = { "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](100) NULL", "[nvarchar](100) NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](500) NULL", "[nvarchar](1000) NULL", "[nvarchar](100) NULL" };
+            string[] sTypesTable7 = { "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](100) NULL", "[nvarchar](100) NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](500) NULL", "[nvarchar](1000) NULL", "[nvarchar](100) NULL", "[nvarchar](100) NULL" };
             string[] sTypesTable8 = { "[int] NULL", "[nvarchar](50) NULL", "[float] NULL", "[float] NULL" };
             string[] sTypesTable9 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[nvarchar](50) NULL" };
 
@@ -183,7 +183,7 @@ namespace appBusinessFormBuilder
             string[] sBaseTypesTable4 = { "autoincrement", "int", "int", "int", "int", "int", "int" };
             string[] sBaseTypesTable5 = { "int", "string" };
             string[] sBaseTypesTable6 = { "autoincrement", "int", "int", "int", "int", "string" };
-            string[] sBaseTypesTable7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string" };
+            string[] sBaseTypesTable7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string", "string" };
             string[] sBaseTypesTable8 = { "int", "string", "float", "float" };
             string[] sBaseTypesTable9 = { "autoincrement", "string"};
 
@@ -194,7 +194,7 @@ namespace appBusinessFormBuilder
             string[] sBaseTypesTableNoAutoId4 = { "int", "int", "int", "int", "int", "int" };
             string[] sBaseTypesTableNoAutoId5 = { "int", "string" };
             string[] sBaseTypesTableNoAutoId6 = { "int", "int", "int", "int", "string" };
-            string[] sBaseTypesTableNoAutoId7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string" };
+            string[] sBaseTypesTableNoAutoId7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string", "string" };
             string[] sBaseTypesTableNoAutoId8 = { "int", "string", "float", "float" };
             string[] sBaseTypesTableNoAutoId9 = { "string" };
 
@@ -202,7 +202,7 @@ namespace appBusinessFormBuilder
             string[] sSectionTypeDescriptions = { "Form", "Header", "Detail", "Footer", "Header Row", "Header Column", "Detail Row", "Detail Column", "Footer Row", "Footer Column", "Grid Item" };
 
             int[] iItemTypes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-            public string[] sItemTypeDescriptions = { "Label", "TextBox", "TextArea", "DropDown", "Checkbox", "RadioButton", "Button", "DatePicker", "TimePicker", "ProgressBar" };
+            public string[] sItemTypeDescriptions = { "Label", "TextBox", "TextArea", "DropDown", "Checkbox", "RadioButton", "Button", "DatePicker", "TimePicker", "Image" };
 
             public string[] sColors = {"Antique White","Aqua", "Beige", "Black", "Blue", "Brown", "Coral", "Crimson", "Cyan", "Dark Blue", "Dark Gray", "Dark Green", "Dark Orange", "Dark Red", "Dark Violet",
                                        "Deep Pink", "Ghost White", "Gold" ,"Gray", "Green", "Hot Pink", "Indigo", "Lavender", "Light Blue", "Light Cyan", "Light Gray", "Light Green", "Light Pink", "Light Yellow",
@@ -230,6 +230,10 @@ namespace appBusinessFormBuilder
             //Line 14 - for Grid Items Dropdown
             //Line 15 - for Grid Items Checkbox
             //Line 16 - for Grid Items RadioGroup/Radiobutton
+            //Line 17 - for Grid Items Button
+            //Line 18 - for Grid Items Date Picker
+            //Line 19 - for Grid Items Time Picker
+            //Line 20 - for Grid Items Image
 
             //Allow for up to 100 parameters per section or type
             int[] iParameterIds = { 1, 2, 
@@ -247,7 +251,11 @@ namespace appBusinessFormBuilder
                                     1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223,
                                     1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321, 1322, 1323, 1324,
                                     1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413, 1414, 1415, 1416, 1417, 1418, 1419, 1420, 1421, 1422, 1423, 1424,
-                                    1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1519, 1520, 1521, 1522, 1523, 1524, 1525, 1526, 1527
+                                    1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1519, 1520, 1521, 1522, 1523, 1524, 1525, 1526, 1527,
+                                    1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620,
+                                    1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717, 1718, 1719, 1720, 1721, 1722,
+                                    1801, 1802, 1803, 1804, 1805, 1806, 1807, 1808, 1809, 1810, 1811, 1812, 1813, 1814, 1815, 1816, 1817, 1818, 1819, 1820, 1821, 1822,
+                                    1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913
                                   };
 
             int[] iParameterSectionTypes = { 1,1,
@@ -265,7 +273,11 @@ namespace appBusinessFormBuilder
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
                                              11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
-                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+                                             11,11,11,11,11,11,11,11,11,11,11,11,11
                                            };
             //The parameter type is whether it is a textbox, drop down etc and is really only applicable to grid items, rows and columns. 
             //For all other sections we only have one set of parameters so make this zero (0) for anything other than grid items, rows and columns
@@ -284,9 +296,13 @@ namespace appBusinessFormBuilder
                                           3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, //This is a textarea
                                           4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4, //This is a dropdown
                                           5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5, //This is a checkbox
-                                          6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6 //This is a radio group
+                                          6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6, //This is a radio group
+                                          7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7, //This is a button
+                                          8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,  //This is a date picker
+                                          9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,  //This is a time picker
+                                          10,10,10,10,10,10,10,10,10,10,10,10,10 //This is an image
                                         };
-            string[] sParameterNames = {"FormSQL", "FormAutoSave", 
+            string[] sParameterNames = { "FormSQL", "FormAutoSave", 
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight",
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight", "Repeatable", "RowsPerPage",
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight",
@@ -301,7 +317,11 @@ namespace appBusinessFormBuilder
                                          "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
                                          "BoundColumn", "DropdownSQL", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
                                          "BoundColumn", "CheckBoxLabel", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnClick",
-                                         "BoundColumn", "Value", "ItemLabels", "ItemValues", "Orientation", "HighlightColor", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange"
+                                         "BoundColumn", "Value", "ItemLabels", "ItemValues", "Orientation", "HighlightColor", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnChange",
+                                         "ButtonLabel", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom","BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnClick",
+                                         "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom",  "EnableDateField", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnChange",
+                                         "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom",  "EnableTimeField", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnChange",
+                                         "BoundColumn", "ImageFile", "ColumnSpan", "ImageAlign", "ImageVertAlignment", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnClick"
                                        };
             string[] sParameterDescriptions = { "SQL or Query", "AutoSave", 
                                                 "Rows", "Columns", "Gridlines", "Gridline Color", "Gridline Weight", 
@@ -318,7 +338,11 @@ namespace appBusinessFormBuilder
                                                 "Bound Column", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
                                                 "Bound Column", "Dropdown SQL", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
                                                 "Bound Column", "Label", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnClick",
-                                                "Bound Column", "Value", "Item Labels", "Item Values", "Orientation", "Highlight Color", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Radio Group Align", "Radio Group Vertical Alignment", "Radio Group Padding Left", "Radio Group Padding Right", "Radio Group Padding Top", "Radio Group Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange"
+                                                "Bound Column", "Value", "Item Labels", "Item Values", "Orientation", "Highlight Color", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Radio Group Align", "Radio Group Vertical Alignment", "Radio Group Padding Left", "Radio Group Padding Right", "Radio Group Padding Top", "Radio Group Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnGotFocus", "OnLostFocus", "OnChange",
+                                                "Label", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnClick",
+                                                "Bound Column", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Enable Date Field", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnChange",
+                                                "Bound Column", "Value", "Background Color", "Column Span", "Font Size", "Font", "Italic", "Bold", "Text Color", "Text Align", "Text Vertical Alignment", "Text Padding Left", "Text Padding Right", "Text Padding Top", "Text Padding Bottom", "Enable Time Field", "Border Left", "Border Right", "Border Top", "Border Bottom",  "Border Color", "OnChange",
+                                                "Bound Column", "Image File", "Column Span", "Image Align", "Image Vertical Alignment", "Border Left", "Border Right", "Border Top", "Border Bottom", "Border Color", "OnGotFocus", "OnLostFocus", "OnClick"
                                               };
             //This parameter type is to how this line will show in the detail popup. Most cases will be a textbox or a drop down
             int[] iParameterTypes = { 2, 4,
@@ -336,7 +360,11 @@ namespace appBusinessFormBuilder
                                       400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
                                       400, 2, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
                                       400, 2, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
-                                      400, 2, 2, 2, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2
+                                      400, 2, 2, 2, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2,
+                                      2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+                                      400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+                                      400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+                                      400, 2, 2, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2
                                     };
             int[] iVersionAvailable = { 0, 0, 
                                         0, 0, 0, 0, 0,
@@ -353,7 +381,11 @@ namespace appBusinessFormBuilder
                                         0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                                        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                                       };
             int[] iParameterOrder = { 1, 2,  
                                       1, 2, 3, 4, 5,
@@ -370,7 +402,11 @@ namespace appBusinessFormBuilder
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
-                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
                                     };
             string[] sDropdownSQL = { "", "Yes;No", 
                                       "", "", "Yes;No", "select Color from tblColors", "2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px",
@@ -387,7 +423,11 @@ namespace appBusinessFormBuilder
                                       "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
                                       "", "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
                                       "", "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
-                                      "", "", "", "", "Horizontal;Vertical", "select Color from tblColors", "select Color from tblColors","", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","",""   
+                                      "", "", "", "", "Horizontal;Vertical", "select Color from tblColors", "select Color from tblColors","", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","","",   
+                                      "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px", "select Color from tblColors", "",
+                                      "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "Yes;No","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","",
+                                      "", "", "select Color from tblColors", "", "8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;20pt;22pt;24pt;26pt;28pt;30pt;32pt","Default;Sans Serif;Serif;Monospace", "Yes;No","Yes;No","select Color from tblColors", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px","0px;1px;2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "Yes;No","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","",
+                                      "", "", "", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","",""  
                                     };
 
             string[] sDefaultValue = { "", "Yes", 
@@ -405,7 +445,11 @@ namespace appBusinessFormBuilder
                                        "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "", 
                                        "", "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "",
                                        "", "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "", 
-                                       "", "", "", "", "Horizontal", "Yellow", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", ""
+                                       "", "", "", "", "Horizontal", "Yellow", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "", "", "",
+                                       "", "Light Grey","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "0px", "0px", "0px", "0px", "Black", "",
+                                       "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "No", "0px", "0px", "0px", "0px", "Black", "",
+                                       "", "", "White","1", "10pt", "", "No", "No", "Black", "Left", "Center", "2px", "2px", "2px", "2px", "No", "0px", "0px", "0px", "0px", "Black", "",
+                                       "", "","1", "Center", "Center", "0px", "0px", "0px", "0px", "Black", "", "", ""
                                      };
 
             string[] sOnBlur = { "ValidateSQL(this);", "", 
@@ -423,9 +467,34 @@ namespace appBusinessFormBuilder
                                  "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
                                  "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
                                  "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "CheckRadioItems(this)", "CheckRadioItems(this)", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);"
+                                 "", "", "CheckRadioItems(this)", "CheckRadioItems(this)", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
+                                 "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","ValidateMacro(this);",
+                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);",
+                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);",
+                                 "", "CheckFileExits(this.value)", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "ValidateMacro(this);", "ValidateMacro(this);", "ValidateMacro(this);"
                                 };
 
+            string[] sExtraButton = {"OpenSQLManager(this);", "", 
+                                     "", "", "", "", "",
+                                     "", "", "", "", "", "", "",
+                                     "", "", "", "", "",
+                                     "", "",
+                                     "", "",
+                                     "", "",
+                                     "", "",
+                                     "", "",
+                                     "", "",
+                                     "", "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                                     "", "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);","OpenMacroManager(this);","OpenMacroManager(this);",
+                                     "", "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);","OpenMacroManager(this);","OpenMacroManager(this);",
+                                     "", "OpenSQLManager(this);", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);","OpenMacroManager(this);","OpenMacroManager(this);",
+                                     "", "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);","OpenMacroManager(this);","OpenMacroManager(this);",
+                                     "", "OpenMacroManager(this);", "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);","OpenMacroManager(this);","OpenMacroManager(this);",
+                                     "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","OpenMacroManager(this);",
+                                     "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);",
+                                     "", "OpenMacroManager(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "OpenMacroManager(this);",
+                                     "", "OpenFileManager(this);", "", "", "", "", "", "", "", "", "OpenMacroManager(this);", "OpenMacroManager(this);", "OpenMacroManager(this);"
+                                    };
             /***********************************************************************************************************************/
 
             int[] iVersionTypes = { 1, 2, 3, 4 };
@@ -557,7 +626,7 @@ namespace appBusinessFormBuilder
             public void FillParameterTable()
             {
                 int i;
-                string[] sValues = new string[11];
+                string[] sValues = new string[12];
                 string sSQL;
                 string sRtnMsg = "";
 
@@ -574,6 +643,7 @@ namespace appBusinessFormBuilder
                     sValues[8] = sDropdownSQL[i].ToString();
                     sValues[9] = sDefaultValue[i].ToString();
                     sValues[10] = sOnBlur[i].ToString();
+                    sValues[11] = sExtraButton[i].ToString();
 
                     sSQL = "Select * from " + sTableNames[6] + " where ID = " + sValues[0];
                     if (DB.GetSQLRecordCount(sSQL, ref sRtnMsg) <= 0)
@@ -613,7 +683,7 @@ namespace appBusinessFormBuilder
             {
                 ArrayList rtnArray = new ArrayList();
                 string sSQL;
-                string[] colNames = { "ParameterId", "ParameterName", "ParameterDescription", "ParameterType", "ParameterValue", "DropdownSQL", "OnBlur" };
+                string[] colNames = { "ParameterId", "ParameterName", "ParameterDescription", "ParameterType", "ParameterValue", "DropdownSQL", "OnBlur", "ExtraButton" };
                 string sRtnMsg = "";
                 ArrayList arrId = new ArrayList();
                 ArrayList arrName = new ArrayList();
@@ -623,6 +693,7 @@ namespace appBusinessFormBuilder
                 ArrayList arrDropdownSQL = new ArrayList();
 //                ArrayList arrDefaultValue = new ArrayList();
                 ArrayList arrOnBlur = new ArrayList();
+                ArrayList arrExtraButton = new ArrayList();
                 try
                 {
                     if (DB.TableExists(sTableNames[6]))
@@ -630,7 +701,7 @@ namespace appBusinessFormBuilder
                         if (iItemId <= 0 && iSectionType != (int)SectionType.HeaderRow && iSectionType != (int)SectionType.HeaderColumn && iSectionType != (int)SectionType.DetailRow && iSectionType != (int)SectionType.DetailColumn && iSectionType != (int)SectionType.FooterRow && iSectionType != (int)SectionType.FooterColumn)
                         {
                             sSQL = "select P.Id as ParameterId, P.ParameterName, P.ParameterDescription, P.ParameterType, ifnull(I.ParameterValue, ifnull(P.DefaultValue,'')) as ParameterValue, " +
-                                   "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur, SortOrder  " +
+                                   "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur, ifnull(P.ExtraButton,'') as ExtraButton, SortOrder  " +
                                    "from " + sTableNames[6] + " P " +
                                    "left outer join " + sTableNames[5] + " I " +
                                    "on P.Id = I.ParameterId " +
@@ -642,9 +713,9 @@ namespace appBusinessFormBuilder
                             if (iSectionType == (int)SectionType.Form)
                             {
                                 sSQL += "UNION ALL " +
-                                        "Select -99, 'FormName', 'Name', " + (int)ItemType.Label + ",Name, '', 'ValidateFormName(this)', -99 from " + sTableNames[0] + " where Id = " + iFormId + " " +
+                                        "Select -99, 'FormName', 'Name', " + (int)ItemType.Label + ",Name, '', 'ValidateFormName(this)', '',-99 from " + sTableNames[0] + " where Id = " + iFormId + " " +
                                         "UNION ALL " +
-                                        "Select -98, 'FormDescription', 'Description', " + (int)ItemType.TextArea + ",Description, '', 'ValidateFormName(this)', -98 from " + sTableNames[0] + " where Id = " + iFormId + " ";
+                                        "Select -98, 'FormDescription', 'Description', " + (int)ItemType.TextArea + ",Description, '', 'ValidateFormName(this)', '', -98 from " + sTableNames[0] + " where Id = " + iFormId + " ";
                             }
 
                             sSQL += "Order by SortOrder";
@@ -665,7 +736,7 @@ namespace appBusinessFormBuilder
                                 case (int)SectionType.FooterRow:
                                 case (int)SectionType.FooterColumn:
                                     sSQL = "select P.Id as ParameterId, P.ParameterName, P.ParameterDescription, P.ParameterType, ifnull(I.ParameterValue, ifnull(P.DefaultValue,'')) as ParameterValue, " +
-                                           "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur  " +
+                                           "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur, ifnull(P.ExtraButton,'') as ExtraButton  " +
                                            "from " + sTableNames[6] + " P " +
                                            "left outer join " + sTableNames[5] + " I " +
                                            "on P.Id = I.ParameterId " +
@@ -677,7 +748,7 @@ namespace appBusinessFormBuilder
                                     break;
                                 default:
                                     sSQL = "select P.Id as ParameterId, P.ParameterName, P.ParameterDescription, P.ParameterType, ifnull(I.ParameterValue, ifnull(P.DefaultValue,'')) as ParameterValue, " +
-                                           "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur  " +
+                                           "ifnull(P.DropdownSQL,'') as DropdownSQL, ifnull(P.OnBlur,'') as OnBlur, ifnull(P.ExtraButton,'') as ExtraButton  " +
                                            "from " + sTableNames[6] + " P " +
                                            "left outer join " + sTableNames[5] + " I " +
                                            "on P.Id = I.ParameterId " +
@@ -703,6 +774,7 @@ namespace appBusinessFormBuilder
                             string sParameterValue = ds.Tables[0].Rows[i].ItemArray[4].ToString();
                             string sDropdownSQL = ds.Tables[0].Rows[i].ItemArray[5].ToString();
                             string sOnBlur = ds.Tables[0].Rows[i].ItemArray[6].ToString();
+                            string sExtraButton = ds.Tables[0].Rows[i].ItemArray[7].ToString();
 
                             arrId.Add(iId);
                             arrName.Add(sParameterName);
@@ -711,6 +783,7 @@ namespace appBusinessFormBuilder
                             arrValue.Add(sParameterValue);
                             arrDropdownSQL.Add(sDropdownSQL);
                             arrOnBlur.Add(sOnBlur);
+                            arrExtraButton.Add(sExtraButton);
                         }
 
                         rtnArray.Add(arrId);
@@ -720,6 +793,7 @@ namespace appBusinessFormBuilder
                         rtnArray.Add(arrValue);
                         rtnArray.Add(arrDropdownSQL);
                         rtnArray.Add(arrOnBlur);
+                        rtnArray.Add(arrExtraButton);
                         return rtnArray;
                     }
                     else
@@ -3026,6 +3100,32 @@ namespace appBusinessFormBuilder
             bReturn = DateTime.TryParseExact(sDate, formats, new System.Globalization.CultureInfo("en-AU"), System.Globalization.DateTimeStyles.None, out dateValue);
             dtReturnDate = dateValue;
             return bReturn;
+        }
+
+        public DateTime GetDateFromString(string sDate, string sFormat)
+        {
+            if(sFormat.Contains("/"))
+            {
+                string[] sDateInfo = sDate.Split('/');
+                int iYearSlash = Convert.ToInt32(sDateInfo[2]);
+                int iMonthSlash = Convert.ToInt32(sDateInfo[1]);
+                int iDaySlash = Convert.ToInt32(sDateInfo[0]);
+                if (sFormat.ToUpper() == "MM/DD/YYYY")
+                {
+                    iMonthSlash = Convert.ToInt32(sDateInfo[0]);
+                    iDaySlash = Convert.ToInt32(sDateInfo[1]);
+                }
+                if (sFormat.ToUpper() == "YYYY/MM/DD")
+                {
+                    iMonthSlash = Convert.ToInt32(sDateInfo[0]);
+                    iDaySlash = Convert.ToInt32(sDateInfo[1]);
+                }
+                DateTime dateSlash = new DateTime(iYearSlash, iMonthSlash, iDaySlash); //Months start at 0
+                return dateSlash;
+            }
+
+            DateTime dtRtn = Convert.ToDateTime(sDate);
+            return dtRtn;
         }
 
     }

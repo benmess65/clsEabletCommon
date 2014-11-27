@@ -59,7 +59,8 @@ namespace appBusinessFormBuilder
 	{
 		public string Name { get; set; }
 		public double Result { get; set; }
-		public SymbolStatus Status { get; set; }
+        public string ResultString { get; set; }
+        public SymbolStatus Status { get; set; }
 	}
 
 	public enum FunctionStatus
@@ -128,7 +129,7 @@ namespace appBusinessFormBuilder
 		/// </summary>
 		/// <param name="expression">The expression to evaluate</param>
 		/// <returns></returns>
-		public double Execute(string expression)
+		public string Execute(string expression)
 		{
 			return ExecuteTokens(TokenizeExpression(expression));
 		}
@@ -146,6 +147,8 @@ namespace appBusinessFormBuilder
 			State state = State.None;
 			int parenCount = 0;
 			string temp;
+            string sResult;
+            clsLocalUtils utils = new clsLocalUtils();
 
 			TextParser parser = new TextParser(expression);
 
@@ -186,7 +189,7 @@ namespace appBusinessFormBuilder
 					// Track number of parentheses
 					parenCount--;
 				}
-				else if ("+-*/".Contains(parser.Peek()))
+				else if ("+-*/=".Contains(parser.Peek()))
 				{
 					// Need a bit of extra code to support unary operators
 					if (state == State.Operand)
@@ -217,7 +220,7 @@ namespace appBusinessFormBuilder
 							// Just ignore unary plus
 							state = State.UnaryOperator;
 						}
-						else
+                        else
 						{
 							throw new EvalException(ErrOperandExpected, parser.Position);
 						}
@@ -246,6 +249,10 @@ namespace appBusinessFormBuilder
 						// Symbol or function cannot follow other operand
 						throw new EvalException(ErrOperatorExpected, parser.Position);
 					}
+                    if (parser.Peek() == '"')
+                    {
+                        parser.MoveAhead();
+                    }
 					if (!(Char.IsLetter(parser.Peek()) || parser.Peek() == '_'))
 					{
 						// Invalid character
@@ -259,24 +266,40 @@ namespace appBusinessFormBuilder
 					// Skip whitespace
 					parser.MovePastWhitespace();
 					// Check for parameter list
-					if (parser.Peek() == '(')
-					{
-						// Found parameter list, evaluate function
-						result = EvaluateFunction(parser, temp, symbolPos);
-					}
-					else
-					{
-						// No parameter list, evaluate symbol (variable)
-						result = EvaluateSymbol(temp, symbolPos);
-					}
-					// Handle negative result
-					if (result < 0)
-					{
-						stack.Push(UnaryMinus);
-						result = Math.Abs(result);
-					}
-					tokens.Add(result.ToString());
-					state = State.Operand;
+                    if (parser.Peek() == '"')
+                    {
+                        parser.MoveAhead();
+//                        tokens.Add(temp);
+                    }
+
+                        if (parser.Peek() == '(')
+                        {
+                            // Found parameter list, evaluate function
+                            result = EvaluateFunction(parser, temp, symbolPos);
+                            sResult = result.ToString();
+                        }
+                        else
+                        {
+                            // No parameter list, evaluate symbol (variable)
+                            sResult = EvaluateSymbol(temp, symbolPos);
+                            if (utils.IsNumeric(sResult))
+                            {
+                                result = Convert.ToDouble(sResult);
+                            }
+                            else
+                            {
+                                result = 0.0;
+                            }
+                        }
+                        // Handle negative result
+                        if (result < 0)
+                        {
+                            stack.Push(UnaryMinus);
+                            result = Math.Abs(result);
+                            sResult = result.ToString();
+                        }
+                        tokens.Add(sResult);
+                        state = State.Operand;
 					continue;
 				}
 				parser.MoveAhead();
@@ -327,7 +350,7 @@ namespace appBusinessFormBuilder
 		protected string ParseSymbolToken(TextParser parser)
 		{
 			int start = parser.Position;
-			while (Char.IsLetterOrDigit(parser.Peek()) || parser.Peek() == '_')
+			while ((Char.IsLetterOrDigit(parser.Peek()) || parser.Peek() == '_') && parser.Peek() != '"')
 				parser.MoveAhead();
 			return parser.Extract(start, parser.Position);
 		}
@@ -396,56 +419,56 @@ namespace appBusinessFormBuilder
 		/// </summary>
 		/// <param name="parser">TextParser object</param>
 		/// <returns></returns>
-		protected List<double> ParseParameters(TextParser parser)
-		{
-			// Move past open parenthesis
-			parser.MoveAhead();
+        //protected List<double> ParseParameters(TextParser parser)
+        //{
+        //    // Move past open parenthesis
+        //    parser.MoveAhead();
 
-			// Look for function parameters
-			List<double> parameters = new List<double>();
-			parser.MovePastWhitespace();
-			if (parser.Peek() != ')')
-			{
-				// Parse function parameter list
-				int paramStart = parser.Position;
-				int parenCount = 1;
+        //    // Look for function parameters
+        //    List<double> parameters = new List<double>();
+        //    parser.MovePastWhitespace();
+        //    if (parser.Peek() != ')')
+        //    {
+        //        // Parse function parameter list
+        //        int paramStart = parser.Position;
+        //        int parenCount = 1;
 
-				while (!parser.EndOfText)
-				{
-					if (parser.Peek() == ',')
-					{
-						// Note: Ignore commas inside parentheses. They could be
-						// from a parameter list for a function inside the parameters
-						if (parenCount == 1)
-						{
-							parameters.Add(EvaluateParameter(parser, paramStart));
-							paramStart = parser.Position + 1;
-						}
-					}
-					if (parser.Peek() == ')')
-					{
-						parenCount--;
-						if (parenCount == 0)
-						{
-							parameters.Add(EvaluateParameter(parser, paramStart));
-							break;
-						}
-					}
-					else if (parser.Peek() == '(')
-					{
-						parenCount++;
-					}
-					parser.MoveAhead();
-				}
-			}
-			// Make sure we found a closing parenthesis
-			if (parser.Peek() != ')')
-				throw new EvalException(ErrClosingParenExpected, parser.Position);
-			// Move past closing parenthesis
-			parser.MoveAhead();
-			// Return parameter list
-			return parameters;
-		}
+        //        while (!parser.EndOfText)
+        //        {
+        //            if (parser.Peek() == ',')
+        //            {
+        //                // Note: Ignore commas inside parentheses. They could be
+        //                // from a parameter list for a function inside the parameters
+        //                if (parenCount == 1)
+        //                {
+        //                    parameters.Add(EvaluateParameter(parser, paramStart));
+        //                    paramStart = parser.Position + 1;
+        //                }
+        //            }
+        //            if (parser.Peek() == ')')
+        //            {
+        //                parenCount--;
+        //                if (parenCount == 0)
+        //                {
+        //                    parameters.Add(EvaluateParameter(parser, paramStart));
+        //                    break;
+        //                }
+        //            }
+        //            else if (parser.Peek() == '(')
+        //            {
+        //                parenCount++;
+        //            }
+        //            parser.MoveAhead();
+        //        }
+        //    }
+        //    // Make sure we found a closing parenthesis
+        //    if (parser.Peek() != ')')
+        //        throw new EvalException(ErrClosingParenExpected, parser.Position);
+        //    // Move past closing parenthesis
+        //    parser.MoveAhead();
+        //    // Return parameter list
+        //    return parameters;
+        //}
 
         protected List<string> ParseParametersString(TextParser parser)
         {
@@ -508,25 +531,25 @@ namespace appBusinessFormBuilder
 		/// <param name="parser">TextParser object</param>
 		/// <param name="paramStart">Column where this parameter started</param>
 		/// <returns></returns>
-		protected double EvaluateParameter(TextParser parser, int paramStart)
-		{
-			try
-			{
-				// Extract expression and evaluate it
-				string expression = parser.Extract(paramStart, parser.Position);
-                if (expression.Contains("'"))
-                {
-                    return 0;
-                }
-				return Execute(expression);
-			}
-			catch (EvalException ex)
-			{
-				// Adjust column and rethrow exception
-				ex.Column += paramStart;
-				throw ex;
-			}
-		}
+        //protected double EvaluateParameter(TextParser parser, int paramStart)
+        //{
+        //    try
+        //    {
+        //        // Extract expression and evaluate it
+        //        string expression = parser.Extract(paramStart, parser.Position);
+        //        //if (expression.Contains("'"))
+        //        //{
+        //        //    return 0;
+        //        //}
+        //        return Execute(expression);
+        //    }
+        //    catch (EvalException ex)
+        //    {
+        //        // Adjust column and rethrow exception
+        //        ex.Column += paramStart;
+        //        throw ex;
+        //    }
+        //}
 
         protected string EvaluateParameterString(TextParser parser, int paramStart)
         {
@@ -534,11 +557,11 @@ namespace appBusinessFormBuilder
             {
                 // Extract expression and evaluate it
                 string expression = parser.Extract(paramStart, parser.Position);
-                if (expression.Contains("'"))
-                {
-                    string sRtn = expression.Replace("'", "");
-                    return sRtn;
-                }
+                //if (expression.Contains("'"))
+                //{
+                //    string sRtn = expression.Replace("'", "");
+                //    return sRtn;
+                //}
                 return Execute(expression).ToString();
             }
             catch (EvalException ex)
@@ -555,9 +578,10 @@ namespace appBusinessFormBuilder
 		/// <param name="name">Name of symbol</param>
 		/// <param name="pos">Position at start of symbol</param>
 		/// <returns></returns>
-		protected double EvaluateSymbol(string name, int pos)
+		protected string EvaluateSymbol(string name, int pos)
 		{
 			double result = default(double);
+            string sResult = default(string);
 
 			// We found a symbol reference
 			SymbolStatus status = SymbolStatus.UndefinedSymbol;
@@ -566,14 +590,16 @@ namespace appBusinessFormBuilder
 				SymbolEventArgs args = new SymbolEventArgs();
 				args.Name = name;
 				args.Result = result;
+                args.ResultString = sResult;
 				args.Status = SymbolStatus.OK;
 				ProcessSymbol(this, args);
 				result = args.Result;
+                sResult = args.ResultString;
 				status = args.Status;
 			}
 			if (status == SymbolStatus.UndefinedSymbol)
 				throw new EvalException(String.Format(ErrUndefinedSymbol, name), pos);
-			return result;
+            return sResult;
 		}
 
 		/// <summary>
@@ -582,9 +608,9 @@ namespace appBusinessFormBuilder
 		/// </summary>
 		/// <param name="tokens">List of tokens to evaluate.</param>
 		/// <returns></returns>
-		protected double ExecuteTokens(List<string> tokens)
+		protected string ExecuteTokens(List<string> tokens)
 		{
-			Stack<double> stack = new Stack<double>();
+			Stack<string> stack = new Stack<string>();
 			double tmp, tmp2;
 
 			foreach (string token in tokens)
@@ -593,35 +619,52 @@ namespace appBusinessFormBuilder
 				int count = token.Count(c => Char.IsDigit(c) || c == '.');
 				if (count == token.Length)
 				{
-					stack.Push(double.Parse(token));
+					stack.Push(double.Parse(token).ToString());
 				}
 				else if (token == "+")
 				{
-					stack.Push(stack.Pop() + stack.Pop());
+					stack.Push((Convert.ToDouble(stack.Pop()) + Convert.ToDouble(stack.Pop())).ToString());
 				}
 				else if (token == "-")
 				{
-					tmp = stack.Pop();
-					tmp2 = stack.Pop();
-					stack.Push(tmp2 - tmp);
+					tmp = Convert.ToDouble(stack.Pop());
+					tmp2 = Convert.ToDouble(stack.Pop());
+					stack.Push((tmp2 - tmp).ToString());
 				}
 				else if (token == "*")
 				{
-					stack.Push(stack.Pop() * stack.Pop());
+					stack.Push((Convert.ToDouble(stack.Pop()) * Convert.ToDouble(stack.Pop())).ToString());
 				}
 				else if (token == "/")
 				{
-					tmp = stack.Pop();
-					tmp2 = stack.Pop();
-					stack.Push(tmp2 / tmp);
+					tmp = Convert.ToDouble(stack.Pop());
+					tmp2 = Convert.ToDouble(stack.Pop());
+					stack.Push((tmp2 / tmp).ToString());
 				}
 				else if (token == UnaryMinus)
 				{
-					stack.Push(-stack.Pop());
+					stack.Push((-1.0 *Convert.ToDouble(stack.Pop())).ToString());
 				}
-			}
+                else if (token == "=")
+                {
+                    tmp = Convert.ToDouble(stack.Pop());
+                    tmp2 = Convert.ToDouble(stack.Pop());
+                    if (tmp == tmp2)
+                    {
+                        stack.Push("0");
+                    }
+                    else
+                    {
+                        stack.Push("-1");
+                    }
+                }
+                else if (token.GetType().Name.ToUpper() == "STRING")
+                {
+                    stack.Push(token);
+                }
+            }
 			// Remaining item on stack contains result
-			return (stack.Count > 0) ? stack.Pop() : 0.0;
+			return (stack.Count > 0) ? stack.Pop() : "0.0";
 		}
 
 		/// <summary>
@@ -634,6 +677,7 @@ namespace appBusinessFormBuilder
 		{
 			switch (s)
 			{
+                case "=":
 		        case "+":
 				case "-":
 					return 1;
