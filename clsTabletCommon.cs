@@ -141,8 +141,8 @@ namespace appBusinessFormBuilder
 
             LocalDB DB = new LocalDB();
 
-            string[] sTableNames = {"tblForms","tblSections", "tblSectionType", "tblGridItems","tblItemType", "tblItemAttributes", "tblParameters", "tblVersionType", "tblColors"};
-            static int iTableNamesLength = 9;
+            string[] sTableNames = {"tblForms","tblSections", "tblSectionType", "tblGridItems","tblItemType", "tblItemAttributes", "tblParameters", "tblVersionType", "tblColors", "tblReservedTables", "tblUserTables"};
+            static int iTableNamesLength = 11;
             string[][] sColumns = new string[iTableNamesLength][];
             string[] sColumnsTable1 = {"ID","Name", "Description"}; //tblForms
             string[] sColumnsTable2 = { "ID", "FormId", "SectionType" }; //tblSections
@@ -153,6 +153,8 @@ namespace appBusinessFormBuilder
             string[] sColumnsTable7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur", "ExtraButton" }; //tblParameters
             string[] sColumnsTable8 = { "ID", "Description", "MonthlyFee", "YearlyFee" }; //tblVersionType
             string[] sColumnsTable9 = { "ID", "Color"}; //tblColors
+            string[] sColumnsTable10 = { "ID", "TableName" }; //tblReservedTables
+            string[] sColumnsTable11 = { "ID", "TableName" }; //tblUserTables
 
             string[][] sColumnsNoAutoId = new string[iTableNamesLength][];
             string[] sColumnsTableNoAutoId1 = { "Name", "Description" }; //tblForms
@@ -164,6 +166,8 @@ namespace appBusinessFormBuilder
             string[] sColumnsTableNoAutoId7 = { "ID", "SectionType", "ItemType", "ParameterName", "ParameterDescription", "ParameterType", "VersionType", "SortOrder", "DropdownSQL", "DefaultValue", "OnBlur", "ExtraButton" }; //tblParameters
             string[] sColumnsTableNoAutoId8 = { "ID", "Description", "MonthlyFee", "YearlyFee" }; //tblVersionType
             string[] sColumnsTableNoAutoId9 = { "Color" }; //tblColors
+            string[] sColumnsTableNoAutoId10 = { "TableName" }; //tblReservedTables
+            string[] sColumnsTableNoAutoId11 = { "TableName" }; //tblUserTables
 
             string[][] sTableColumnTypes = new string[iTableNamesLength][];
             string[] sTypesTable1 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[nvarchar](50) NULL", "[nvarchar](500) NULL" };
@@ -175,6 +179,8 @@ namespace appBusinessFormBuilder
             string[] sTypesTable7 = { "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](100) NULL", "[nvarchar](100) NULL", "[int] NULL", "[int] NULL", "[int] NULL", "[nvarchar](500) NULL", "[nvarchar](1000) NULL", "[nvarchar](100) NULL", "[nvarchar](100) NULL" };
             string[] sTypesTable8 = { "[int] NULL", "[nvarchar](50) NULL", "[float] NULL", "[float] NULL" };
             string[] sTypesTable9 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[nvarchar](50) NULL" };
+            string[] sTypesTable10 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[nvarchar](250) NULL" };
+            string[] sTypesTable11 = { "INTEGER PRIMARY KEY AUTOINCREMENT", "[nvarchar](250) NULL" };
 
             string[][] sTableColumnBaseTypes = new string[iTableNamesLength][];
             string[] sBaseTypesTable1 = { "autoincrement", "string", "string" };
@@ -186,6 +192,8 @@ namespace appBusinessFormBuilder
             string[] sBaseTypesTable7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string", "string" };
             string[] sBaseTypesTable8 = { "int", "string", "float", "float" };
             string[] sBaseTypesTable9 = { "autoincrement", "string"};
+            string[] sBaseTypesTable10 = { "autoincrement", "string" };
+            string[] sBaseTypesTable11 = { "autoincrement", "string" };
 
             string[][] sTableColumnBaseTypesNoAutoId = new string[iTableNamesLength][];
             string[] sBaseTypesTableNoAutoId1 = { "string", "string" };
@@ -197,6 +205,8 @@ namespace appBusinessFormBuilder
             string[] sBaseTypesTableNoAutoId7 = { "int", "int", "int", "string", "string", "int", "int", "int", "string", "string", "string", "string" };
             string[] sBaseTypesTableNoAutoId8 = { "int", "string", "float", "float" };
             string[] sBaseTypesTableNoAutoId9 = { "string" };
+            string[] sBaseTypesTableNoAutoId10 = { "string" };
+            string[] sBaseTypesTableNoAutoId11 = { "string" };
 
             int[] iSectionTypes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             string[] sSectionTypeDescriptions = { "Form", "Header", "Detail", "Footer", "Header Row", "Header Column", "Detail Row", "Detail Column", "Footer Row", "Footer Column", "Grid Item" };
@@ -521,6 +531,8 @@ namespace appBusinessFormBuilder
                 sColumns[6] = sColumnsTable7;
                 sColumns[7] = sColumnsTable8;
                 sColumns[8] = sColumnsTable9;
+                sColumns[9] = sColumnsTable10;
+                sColumns[10] = sColumnsTable11;
 
                 sTableColumnTypes[0] = sTypesTable1;
                 sTableColumnTypes[1] = sTypesTable2;
@@ -531,6 +543,8 @@ namespace appBusinessFormBuilder
                 sTableColumnTypes[6] = sTypesTable7;
                 sTableColumnTypes[7] = sTypesTable8;
                 sTableColumnTypes[8] = sTypesTable9;
+                sTableColumnTypes[9] = sTypesTable10;
+                sTableColumnTypes[10] = sTypesTable11;
 
                 sTableColumnBaseTypes[0] = sBaseTypesTable1;
                 sTableColumnBaseTypes[1] = sBaseTypesTable2;
@@ -541,6 +555,8 @@ namespace appBusinessFormBuilder
                 sTableColumnBaseTypes[6] = sBaseTypesTable7;
                 sTableColumnBaseTypes[7] = sBaseTypesTable8;
                 sTableColumnBaseTypes[8] = sBaseTypesTable9;
+                sTableColumnBaseTypes[9] = sBaseTypesTable10;
+                sTableColumnBaseTypes[10] = sBaseTypesTable11;
             }
 
             public bool CreateBaseTables()
@@ -559,6 +575,7 @@ namespace appBusinessFormBuilder
                 FillParameterTable();
                 FillVersionTable();
                 FillColorsTable();
+                FillReservedTablesTable();
 
                 return true;
             }
@@ -622,6 +639,24 @@ namespace appBusinessFormBuilder
                 }
             }
 
+
+            public void FillReservedTablesTable()
+            {
+                int i;
+                string[] sValues = new string[1];
+                string sSQL;
+                string sRtnMsg = "";
+
+                for (i = 0; i < sTableNames.Length; i++)
+                {
+                    sValues[0] = sTableNames[i];
+                    sSQL = "Select * from " + sTableNames[9] + " where TableName = '" + sValues[0] + "'";
+                    if (DB.GetSQLRecordCount(sSQL, ref sRtnMsg) <= 0)
+                    {
+                        DB.AddRecord(sTableNames[9], sColumnsTableNoAutoId10, sBaseTypesTableNoAutoId10, sValues);
+                    }
+                }
+            }
 
             public void FillParameterTable()
             {
@@ -1212,6 +1247,199 @@ namespace appBusinessFormBuilder
                 }
             }
 
+            public int ColumnsHiddenInSectionFromColumn(int iFormId, int iSectionId, int iThisColumn, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                int iHiddenCols = 0;
+                sColNames[0] = "Counter";
+                sSQL = "select count(*) as Counter " +
+                        "from tblItemAttributes I, tblParameters P, tblGridItems G " +
+                        "where I.FormId = " + iFormId + " " +
+                        "and I.SectionType = " + iSectionId + " " +
+                        "and I.ParameterId = P.Id " +
+                        "and P.ParameterName = 'Visible' " +
+                        "and P.SectionType = I.SectionType " +
+                        "and I.ParameterValue = 'No' " +
+                        "and G.ID = I.ItemId " +
+                        "and G.ColumnId >= " + iThisColumn;
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        clsLocalUtils utils = new clsLocalUtils();
+                        string sHiddenCols = ds.Tables[0].Rows[0].ItemArray[0].ToString();
+                        if (utils.IsNumeric(sHiddenCols))
+                        {
+                            iHiddenCols = Convert.ToInt32(sHiddenCols);
+                        }
+                        return iHiddenCols;
+                    }
+                }
+            }
+
+            public int MinimumSpannedColumnNumberForSection(int iFormId, int iSectionId, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                int iMinColNo = 999;
+                sColNames[0] = "MinColNo";
+                sSQL = "select min(ColumnId) as MinColNo " +
+                        "from tblItemAttributes I, tblParameters P, tblGridItems G " +
+                        "where I.FormId = " + iFormId + " " +
+                        "and I.SectionType = " + (int)SectionType.GridItem + " " +
+                        "and I.ParameterId = P.Id " +
+                        "and P.ParameterName = 'ColumnSpan' " +
+                        "and P.SectionType = I.SectionType " +
+                        "and I.ParameterValue > 1 " +
+                        "and G.ID = I.ItemId " +
+                        "and G.SectionId = " + iSectionId;
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return 999;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return 999;
+                    }
+                    else
+                    {
+                        clsLocalUtils utils = new clsLocalUtils();
+                        string sMinColNo = ds.Tables[0].Rows[0].ItemArray[0].ToString();
+                        if (utils.IsNumeric(sMinColNo))
+                        {
+                            iMinColNo = Convert.ToInt32(sMinColNo);
+                        }
+                        else
+                        {
+                            iMinColNo = 999;
+                        }
+                        return iMinColNo;
+                    }
+                }
+            }
+
+            public int[] GetHiddenColumns(int iFormId, int iSectionId, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "ColumnId";
+                sSQL = "select ColumnId " +
+                        "from tblItemAttributes I, tblParameters P, tblGridItems G " +
+                        "where I.FormId = " + iFormId + " " +
+                        "and I.SectionType = " + iSectionId + " " +
+                        "and I.ParameterId = P.Id " +
+                        "and P.ParameterName = 'Visible' " +
+                        "and P.SectionType = I.SectionType " +
+                        "and I.ParameterValue = 'No' " +
+                        "and G.ID = I.ItemId ";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        clsLocalUtils utils = new clsLocalUtils();
+                        int[] rtnInt = new int[ds.Tables[0].Rows.Count];
+                        for (int i = 0; i < rtnInt.Length; i++)
+                        {
+                            rtnInt[i] = Convert.ToInt32(ds.Tables[0].Rows[i].ItemArray[0]);
+                        }
+                        return rtnInt;
+                    }
+                }
+            }
+
+            public int[] GetHiddenRows(int iFormId, int iSectionId, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "RowId";
+                sSQL = "select RowId " +
+                        "from tblItemAttributes I, tblParameters P, tblGridItems G " +
+                        "where I.FormId = " + iFormId + " " +
+                        "and I.SectionType = " + iSectionId + " " +
+                        "and I.ParameterId = P.Id " +
+                        "and P.ParameterName = 'Visible' " +
+                        "and P.SectionType = I.SectionType " +
+                        "and I.ParameterValue = 'No' " +
+                        "and G.ID = I.ItemId ";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        clsLocalUtils utils = new clsLocalUtils();
+                        int[] rtnInt = new int[ds.Tables[0].Rows.Count];
+                        for (int i = 0; i < rtnInt.Length; i++)
+                        {
+                            rtnInt[i] = Convert.ToInt32(ds.Tables[0].Rows[i].ItemArray[0]);
+                        }
+                        return rtnInt;
+                    }
+                }
+            }
+
+            public int GetHiddenRowCount(int iFormId, int iSectionId, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "Counter";
+                sSQL = "select count(*) as Counter " +
+                        "from tblItemAttributes I, tblParameters P, tblGridItems G " +
+                        "where I.FormId = " + iFormId + " " +
+                        "and I.SectionType = " + iSectionId + " " +
+                        "and I.ParameterId = P.Id " +
+                        "and P.ParameterName = 'Visible' " +
+                        "and P.SectionType = I.SectionType " +
+                        "and I.ParameterValue = 'No' " +
+                        "and G.ID = I.ItemId ";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        int rtnInt = Convert.ToInt32(ds.Tables[0].Rows[0].ItemArray[0]);
+                        return rtnInt;
+                    }
+                }
+            }
+
             public bool SaveGridItemDetails(int iFormId, int iSectionId, int iItemType, int iRowId, int iColumnId, int iItemProgramId, ref int iUniqueItemId, ref string sRtnMsg)
             {
                 try
@@ -1407,7 +1635,84 @@ namespace appBusinessFormBuilder
 
             }
 
-        }
+            public bool ReservedTableExists(string sUserTableName, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "TableName";
+                sSQL = "select TableName from " + sTableNames[9] + " where TableName = '" + sUserTableName + "'";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            public bool UserTableExists(string sUserTableName, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "TableName";
+                sSQL = "select TableName from " + sTableNames[10] + " where TableName = '" + sUserTableName + "'";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            public bool SetUserTableRecord(string sTableName, ref string sRtnMsg)
+            {
+                string[] sValues = new string[1];
+                string sSQL;
+
+                sSQL = "Select * from " + sTableNames[10] + " where TableName = '" + sTableName + "'";
+                if (DB.GetSQLRecordCount(sSQL, ref sRtnMsg) <= 0)
+                {
+                    if (sRtnMsg != "")
+                    {
+                        return false;
+                    }
+                    sValues[0] = sTableName;
+                    return DB.AddRecord(sTableNames[10], sColumnsTableNoAutoId11, sBaseTypesTableNoAutoId11, sValues);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            public bool DeleteUserTableRecord(string sTableName, ref string sRtnMsg)
+            {
+                string sSQL;
+                sSQL = "Delete from " + sTableNames[10] + " where TableName = '" + sTableName + "'";
+                return DB.ExecuteSQL(sSQL, ref sRtnMsg);
+
+            }
+
+        } //End GridUtilities class
         
     }
 
@@ -1515,6 +1820,18 @@ namespace appBusinessFormBuilder
                 CloseConnection(conn);
                 return false;
             }
+        }
+
+        public bool DropTable(string sTableName, ref string sRtnMsg)
+        {
+            string sSQL = "Drop table " + sTableName;
+            return ExecuteSQL(sSQL, ref sRtnMsg);
+        }
+
+        public bool RenameTable(string sFromTableName, string sToTableName, ref string sRtnMsg)
+        {
+            string sSQL = "Alter table " + sFromTableName + " to " + sToTableName;
+            return ExecuteSQL(sSQL, ref sRtnMsg);
         }
 
         public bool AddRecord(string sTableName, string[] sColNames, string[] sColTypes, object[] objColValues)
@@ -2178,7 +2495,210 @@ namespace appBusinessFormBuilder
             return rtnArray;
         }
 
-        public ArrayList GetColumnNamesFromSQL(string sSQL, ref string sRtnMsg )
+        public ArrayList GetTableColumnDetails(string sTableName, ref string sRtnMsg)
+        {
+            string sColName = "";
+            string sSQL;
+            DataSet ds = new DataSet();
+            string[] sColNames = new string[1];
+            sColNames[0] = "sql";
+            ArrayList rtnArray = new ArrayList();
+            ArrayList arrColNames = new ArrayList();
+            ArrayList arrColTypes = new ArrayList();
+            ArrayList arrColSize = new ArrayList();
+            ArrayList arrNull = new ArrayList();
+            int iStart;
+            int iEnd;
+            int iLength;
+            int i;
+            DataSet ds2 = new DataSet();
+            string[] sColNames2 = new string[6];
+            sColNames2[0] = "cid";
+            sColNames2[1] = "name";
+            sColNames2[2] = "type";
+            sColNames2[3] = "notnull";
+            sColNames2[4] = "dflt_value";
+            sColNames2[5] = "pk";
+            string sType = "";
+            string sSize = "";
+            string sThisColName = "";
+
+
+            sSQL = "SELECT sql FROM sqlite_master " +
+                   "WHERE tbl_name = '" + sTableName + "' COLLATE NOCASE";
+
+            ds = ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+
+            if (ds == null)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            if (ds.Tables.Count <= 0)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            if (ds.Tables[0].Rows.Count <= 0)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            sColName = ds.Tables[0].Rows[0].ItemArray[0].ToString();
+
+            sSQL = "PRAGMA table_info('" + sTableName + "')";
+            ds2 = ReadSQLDataSet(sSQL, sColNames2, ref sRtnMsg);
+
+            if (ds2 == null)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            if (ds2.Tables.Count <= 0)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            if (ds2.Tables[0].Rows.Count <= 0)
+            {
+                sRtnMsg = "There is no table in the database called " + sTableName;
+                return rtnArray;
+            }
+
+            for (i = 0; i < ds2.Tables[0].Rows.Count; i++)
+            {
+                sThisColName = ds2.Tables[0].Rows[i].ItemArray[1].ToString();
+                arrColNames.Add(sThisColName);
+                sType = ds2.Tables[0].Rows[i].ItemArray[2].ToString();
+                arrColTypes.Add(sType);
+                if(sType.ToUpper() == "NVARCHAR")
+                {
+                    sSize = sColName.Substring(sColName.IndexOf("[" + sThisColName + "]") + sThisColName.Length + 2);
+                    sSize = sSize.Substring(sSize.IndexOf("[" + sType + "]") + 2 + sType.Length);
+                    sSize = sSize.Substring(sSize.IndexOf("(") + 1);
+                    sSize = sSize.Substring(0, sSize.IndexOf(")"));
+                }
+                else
+                {
+                    sSize = "";
+                }
+                arrColSize.Add(sSize);
+                arrNull.Add(ds2.Tables[0].Rows[i].ItemArray[3].ToString());
+            }
+
+            rtnArray.Add(arrColNames);
+            rtnArray.Add(arrColTypes);
+            rtnArray.Add(arrColSize);
+            rtnArray.Add(arrNull);
+
+            return rtnArray;
+        }
+
+        public bool CopyTableStructureAndData(string sTableFrom, string sTableTo, string[] sFromColNamesToReplace, string[] sToColNamesToReplace, string[] sNewReplaceTypes, bool bCopyData, ref string sRtnMsg)
+        {
+            int i, j;
+            int iCounter = 0;
+            ArrayList arrColDetails = GetTableColumnDetails(sTableFrom, ref sRtnMsg);
+            ArrayList arrColNames = new ArrayList();
+            ArrayList arrColTypes = new ArrayList();
+            ArrayList arrColSize = new ArrayList();
+            ArrayList arrNull = new ArrayList();
+            
+            //Now for each piece of info in the array we need to build a row
+            arrColNames = (ArrayList)arrColDetails[0];
+            arrColTypes = (ArrayList)arrColDetails[1];
+            arrColSize = (ArrayList)arrColDetails[2];
+            arrNull = (ArrayList)arrColDetails[3];
+            int iRows = arrColNames.Count;
+            string[] sColumns = new string[iRows];
+            string[] sTypes = new string[iRows];
+            bool bFoundReplacement = false;
+            string sSQL = "INSERT INTO " + sTableTo + "(";
+            string sSQL1 = "SELECT ";
+            bool bRtn = true;
+
+            for (i = 0; i < iRows; i++)
+            {
+                bFoundReplacement = false;
+                if (sFromColNamesToReplace != null && sToColNamesToReplace != null && sNewReplaceTypes != null)
+                {
+                    if (sFromColNamesToReplace.Length == sToColNamesToReplace.Length)
+                    {
+                        for (j = 0; j < sFromColNamesToReplace.Length; j++)
+                        {
+                            if (arrColNames[i].ToString().ToUpper() == sFromColNamesToReplace[j].ToUpper())
+                            {
+                                sTypes[iCounter] = sNewReplaceTypes[j];
+                                sColumns[i] = sToColNamesToReplace[j];
+                                bFoundReplacement = true;
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+                string sSize = arrColSize[i].ToString();
+
+                if(sSize != "")
+                {
+                    sSize = "(" + sSize + ") ";
+                }
+
+                string sNull = "";
+                if (arrNull[i].ToString() == "0")
+                {
+                    sNull = " NULL";
+                }
+                else
+                {
+                    sNull = " NOT NULL";
+                }
+
+                if (!bFoundReplacement)
+                {
+                    sColumns[iCounter] = arrColNames[i].ToString();
+                    sTypes[iCounter] = "[" + arrColTypes[i].ToString() + "] " + sSize + " " + sNull;
+                }
+
+                if (sColumns[iCounter] != "")
+                {
+                    sSQL = sSQL + sColumns[iCounter] + ",";
+                    sSQL1 = sSQL1 + arrColNames[i].ToString() + ",";
+                    iCounter++;
+                }
+            }
+
+            string[] sColumnsToAdd = new string[iCounter];
+            string[] sTypesToAdd = new string[iCounter];
+
+            for (i = 0; i < iCounter; i++)
+            {
+                sColumnsToAdd[i] = sColumns[i];
+                sTypesToAdd[i] = sTypes[i];
+            }
+
+            bRtn = CreateTable(sTableTo, sColumnsToAdd, sTypesToAdd);
+
+            sSQL = sSQL.Substring(0, sSQL.Length - 1) + ") ";
+            sSQL1 = sSQL1.Substring(0, sSQL1.Length - 1) + " FROM " + sTableFrom;
+
+            sSQL = sSQL + sSQL1;
+
+            if (bRtn && bCopyData)
+            {
+                bRtn = ExecuteSQL(sSQL, ref sRtnMsg);
+            }
+
+            return bRtn;
+        }
+
+        public ArrayList GetColumnNamesFromSQL(string sSQL, ref string sRtnMsg)
         {
             string sColumnNames;
             int i;
