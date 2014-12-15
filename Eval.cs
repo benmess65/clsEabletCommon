@@ -158,150 +158,170 @@ namespace appBusinessFormBuilder
 				{
 					// Ignore spaces, tabs, etc.
 				}
-				else if (parser.Peek() == '(')
-				{
-					// Cannot follow operand
-					if (state == State.Operand)
-						throw new EvalException(ErrOperatorExpected, parser.Position);
-					// Allow additional unary operators after "("
-					if (state == State.UnaryOperator)
-						state = State.Operator;
-					// Push opening parenthesis onto stack
-					stack.Push(parser.Peek().ToString());
-					// Track number of parentheses
-					parenCount++;
-				}
-				else if (parser.Peek() == ')')
-				{
-					// Must follow operand
-					if (state != State.Operand)
-						throw new EvalException(ErrOperandExpected, parser.Position);
-					// Must have matching open parenthesis
-					if (parenCount == 0)
-						throw new EvalException(ErrUnmatchedClosingParen, parser.Position);
-					// Pop all operators until matching "(" found
-					temp = stack.Pop();
-					while (temp != "(")
-					{
-						tokens.Add(temp);
-						temp = stack.Pop();
-					}
-					// Track number of parentheses
-					parenCount--;
-				}
-				else if ("+-*/=".Contains(parser.Peek()))
-				{
-					// Need a bit of extra code to support unary operators
-					if (state == State.Operand)
-					{
-						// Pop operators with precedence >= current operator
-						int currPrecedence = GetPrecedence(parser.Peek().ToString());
-						while (stack.Count > 0 && GetPrecedence(stack.Peek()) >= currPrecedence)
-							tokens.Add(stack.Pop());
-						stack.Push(parser.Peek().ToString());
-						state = State.Operator;
-					}
-					else if (state == State.UnaryOperator)
-					{
-						// Don't allow two unary operators together
-						throw new EvalException(ErrOperandExpected, parser.Position);
-					}
-					else
-					{
-						// Test for unary operator
-						if (parser.Peek() == '-')
-						{
-							// Push unary minus
-							stack.Push(UnaryMinus);
-							state = State.UnaryOperator;
-						}
-						else if (parser.Peek() == '+')
-						{
-							// Just ignore unary plus
-							state = State.UnaryOperator;
-						}
-                        else
-						{
-							throw new EvalException(ErrOperandExpected, parser.Position);
-						}
-					}
-				}
-				else if (Char.IsDigit(parser.Peek()) || parser.Peek() == '.')
-				{
-					if (state == State.Operand)
-					{
-						// Cannot follow other operand
-						throw new EvalException(ErrOperatorExpected, parser.Position);
-					}
-					// Parse number
-					temp = ParseNumberToken(parser);
-					tokens.Add(temp);
-					state = State.Operand;
-					continue;
-				}
-				else
-				{
-					double result;
-
-					// Parse symbols and functions
-					if (state == State.Operand)
-					{
-						// Symbol or function cannot follow other operand
-						throw new EvalException(ErrOperatorExpected, parser.Position);
-					}
-                    if (parser.Peek() == '"')
+                else if (parser.Peek() == '\"')
+                {
+                    parser.MoveAhead();
+                    int iStart = parser.Position;
+                    //Move all the way to the next double quote
+                    while(parser.Peek() != '\"')
                     {
                         parser.MoveAhead();
                     }
-					if (!(Char.IsLetter(parser.Peek()) || parser.Peek() == '_'))
-					{
-						// Invalid character
-						temp = String.Format(ErrUnexpectedCharacter, parser.Peek());
-						throw new EvalException(temp, parser.Position);
-					}
-					// Save start of symbol for error reporting
-					int symbolPos = parser.Position;
-					// Parse this symbol
-					temp = ParseSymbolToken(parser);
-					// Skip whitespace
-					parser.MovePastWhitespace();
-					// Check for parameter list
-                    if (parser.Peek() == '"')
-                    {
-                        parser.MoveAhead();
-//                        tokens.Add(temp);
-                    }
 
-                        if (parser.Peek() == '(')
+                    int iEnd = parser.Position;
+                    if (iEnd > iStart)
+                    {
+                        tokens.Add(parser.Text.Substring(iStart, iEnd - iStart));
+                    }
+                    else
+                    {
+                        tokens.Add("");
+                    }
+                }
+                else if (parser.Peek() == '(')
+                {
+                    // Cannot follow operand
+                    if (state == State.Operand)
+                        throw new EvalException(ErrOperatorExpected, parser.Position);
+                    // Allow additional unary operators after "("
+                    if (state == State.UnaryOperator)
+                        state = State.Operator;
+                    // Push opening parenthesis onto stack
+                    stack.Push(parser.Peek().ToString());
+                    // Track number of parentheses
+                    parenCount++;
+                }
+                else if (parser.Peek() == ')')
+                {
+                    // Must follow operand
+                    if (state != State.Operand)
+                        throw new EvalException(ErrOperandExpected, parser.Position);
+                    // Must have matching open parenthesis
+                    if (parenCount == 0)
+                        throw new EvalException(ErrUnmatchedClosingParen, parser.Position);
+                    // Pop all operators until matching "(" found
+                    temp = stack.Pop();
+                    while (temp != "(")
+                    {
+                        tokens.Add(temp);
+                        temp = stack.Pop();
+                    }
+                    // Track number of parentheses
+                    parenCount--;
+                }
+                else if ("+-*/=".Contains(parser.Peek()))
+                {
+                    // Need a bit of extra code to support unary operators
+                    if (state == State.Operand)
+                    {
+                        // Pop operators with precedence >= current operator
+                        int currPrecedence = GetPrecedence(parser.Peek().ToString());
+                        while (stack.Count > 0 && GetPrecedence(stack.Peek()) >= currPrecedence)
+                            tokens.Add(stack.Pop());
+                        stack.Push(parser.Peek().ToString());
+                        state = State.Operator;
+                    }
+                    else if (state == State.UnaryOperator)
+                    {
+                        // Don't allow two unary operators together
+                        throw new EvalException(ErrOperandExpected, parser.Position);
+                    }
+                    else
+                    {
+                        // Test for unary operator
+                        if (parser.Peek() == '-')
                         {
-                            // Found parameter list, evaluate function
-                            result = EvaluateFunction(parser, temp, symbolPos);
-                            sResult = result.ToString();
-                        }
-                        else
-                        {
-                            // No parameter list, evaluate symbol (variable)
-                            sResult = EvaluateSymbol(temp, symbolPos);
-                            if (utils.IsNumeric(sResult))
-                            {
-                                result = Convert.ToDouble(sResult);
-                            }
-                            else
-                            {
-                                result = 0.0;
-                            }
-                        }
-                        // Handle negative result
-                        if (result < 0)
-                        {
+                            // Push unary minus
                             stack.Push(UnaryMinus);
-                            result = Math.Abs(result);
-                            sResult = result.ToString();
+                            state = State.UnaryOperator;
                         }
-                        tokens.Add(sResult);
-                        state = State.Operand;
-					continue;
-				}
+                        else if (parser.Peek() == '+')
+                        {
+                            // Just ignore unary plus
+                            state = State.UnaryOperator;
+                        }
+                        else
+                        {
+                            throw new EvalException(ErrOperandExpected, parser.Position);
+                        }
+                    }
+                }
+                else if (Char.IsDigit(parser.Peek()) || parser.Peek() == '.')
+                {
+                    if (state == State.Operand)
+                    {
+                        // Cannot follow other operand
+                        throw new EvalException(ErrOperatorExpected, parser.Position);
+                    }
+                    // Parse number
+                    temp = ParseNumberToken(parser);
+                    tokens.Add(temp);
+                    state = State.Operand;
+                    continue;
+                }
+                else
+                {
+                    double result;
+
+                    // Parse symbols and functions
+                    if (state == State.Operand)
+                    {
+                        // Symbol or function cannot follow other operand
+                        throw new EvalException(ErrOperatorExpected, parser.Position);
+                    }
+                    if (parser.Peek() == '"')
+                    {
+                        parser.MoveAhead();
+                    }
+                    if (!(Char.IsLetter(parser.Peek()) || parser.Peek() == '_'))
+                    {
+                        // Invalid character
+                        temp = String.Format(ErrUnexpectedCharacter, parser.Peek());
+                        throw new EvalException(temp, parser.Position);
+                    }
+                    // Save start of symbol for error reporting
+                    int symbolPos = parser.Position;
+                    // Parse this symbol
+                    temp = ParseSymbolToken(parser);
+                    // Skip whitespace
+                    parser.MovePastWhitespace();
+                    // Check for parameter list
+                    if (parser.Peek() == '"')
+                    {
+                        parser.MoveAhead();
+                        //                        tokens.Add(temp);
+                    }
+
+                    if (parser.Peek() == '(')
+                    {
+                        // Found parameter list, evaluate function
+                        result = EvaluateFunction(parser, temp, symbolPos);
+                        sResult = result.ToString();
+                    }
+                    else
+                    {
+                        // No parameter list, evaluate symbol (variable)
+                        sResult = EvaluateSymbol(temp, symbolPos);
+                        if (utils.IsNumeric(sResult))
+                        {
+                            result = Convert.ToDouble(sResult);
+                        }
+                        else
+                        {
+                            result = 0.0;
+                        }
+                    }
+                    // Handle negative result
+                    if (result < 0)
+                    {
+                        stack.Push(UnaryMinus);
+                        result = Math.Abs(result);
+                        sResult = result.ToString();
+                    }
+                    tokens.Add(sResult);
+                    state = State.Operand;
+                    continue;
+                }
 				parser.MoveAhead();
 			}
 			// Expression cannot end with operator

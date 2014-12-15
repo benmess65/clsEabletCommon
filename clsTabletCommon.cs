@@ -246,7 +246,7 @@ namespace appBusinessFormBuilder
             //Line 20 - for Grid Items Image
 
             //Allow for up to 100 parameters per section or type
-            int[] iParameterIds = { 1, 2, 
+            int[] iParameterIds = { 1, 2, 3,
                                     101, 102, 103, 104, 105,
                                     201, 202, 203, 204, 205, 206, 207,
                                     301, 302, 303, 304, 305,
@@ -268,7 +268,7 @@ namespace appBusinessFormBuilder
                                     1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913
                                   };
 
-            int[] iParameterSectionTypes = { 1,1,
+            int[] iParameterSectionTypes = { 1,1,1,
                                              2,2,2,2,2, 
                                              3,3,3,3,3,3,3,
                                              4,4,4,4,4,
@@ -291,7 +291,7 @@ namespace appBusinessFormBuilder
                                            };
             //The parameter type is whether it is a textbox, drop down etc and is really only applicable to grid items, rows and columns. 
             //For all other sections we only have one set of parameters so make this zero (0) for anything other than grid items, rows and columns
-            int[] iParameterItemTypes = { 0,0,
+            int[] iParameterItemTypes = { 0,0,0,
                                           0,0,0,0,0,
                                           0,0,0,0,0,0,0,
                                           0,0,0,0,0,
@@ -312,7 +312,7 @@ namespace appBusinessFormBuilder
                                           9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,  //This is a time picker
                                           10,10,10,10,10,10,10,10,10,10,10,10,10 //This is an image
                                         };
-            string[] sParameterNames = { "FormSQL", "FormAutoSave", 
+            string[] sParameterNames = { "FormSQL", "FormKeyColumn", "FormAutoSave", 
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight",
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight", "Repeatable", "RowsPerPage",
                                          "Rows", "Columns", "Gridlines", "GridlineColor", "GridlineWeight",
@@ -333,7 +333,7 @@ namespace appBusinessFormBuilder
                                          "BoundColumn", "Value", "BackgroundColor", "ColumnSpan", "FontSize", "Font", "Italic", "Bold", "TextColor", "TextAlign", "TextVertAlignment", "TextPaddingLeft", "TextPaddingRight", "TextPaddingTop", "TextPaddingBottom",  "EnableTimeField", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnChange",
                                          "BoundColumn", "ImageFile", "ColumnSpan", "ImageAlign", "ImageVertAlignment", "BorderLeft", "BorderRight", "BorderTop", "BorderBottom", "BorderColor", "OnGotFocus", "OnLostFocus", "OnClick"
                                        };
-            string[] sParameterDescriptions = { "SQL or Query", "AutoSave", 
+            string[] sParameterDescriptions = { "SQL or Query", "Key Column", "AutoSave", 
                                                 "Rows", "Columns", "Gridlines", "Gridline Color", "Gridline Weight", 
                                                 "Rows", "Columns", "Gridlines", "Gridline Color", "Gridline Weight", "Repeatable", "Total Rows Per Page",
                                                 "Rows", "Columns", "Gridlines", "Gridline Color", "Gridline Weight",
@@ -355,7 +355,7 @@ namespace appBusinessFormBuilder
                                                 "Bound Column", "Image File", "Column Span", "Image Align", "Image Vertical Alignment", "Border Left", "Border Right", "Border Top", "Border Bottom", "Border Color", "OnGotFocus", "OnLostFocus", "OnClick"
                                               };
             //This parameter type is to how this line will show in the detail popup. Most cases will be a textbox or a drop down
-            int[] iParameterTypes = { 2, 4,
+            int[] iParameterTypes = { 2, 4, 4,
                                       2, 2, 4, 4, 4,
                                       2, 2, 4, 4, 4, 4, 4,
                                       2, 2, 4, 4, 4,
@@ -376,7 +376,7 @@ namespace appBusinessFormBuilder
                                       400, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
                                       400, 2, 2, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2
                                     };
-            int[] iVersionAvailable = { 0, 0, 
+            int[] iVersionAvailable = { 0, 0, 0,
                                         0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 2, 2,
                                         0, 0, 0, 0, 0,
@@ -397,7 +397,7 @@ namespace appBusinessFormBuilder
                                         0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
                                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                                       };
-            int[] iParameterOrder = { 1, 2,  
+            int[] iParameterOrder = { 1, 2, 3, 
                                       1, 2, 3, 4, 5,
                                       1, 2, 3, 4, 5, 6, 7,
                                       1, 2, 3, 4, 5,
@@ -418,7 +418,7 @@ namespace appBusinessFormBuilder
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
                                       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
                                     };
-            string[] sDropdownSQL = { "", "Yes;No", 
+            string[] sDropdownSQL = { "", "", "Yes;No", 
                                       "", "", "Yes;No", "select Color from tblColors", "2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px",
                                       "", "", "Yes;No", "select Color from tblColors", "2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px", "Yes;No", "1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20",
                                       "", "", "Yes;No", "select Color from tblColors", "2px;3px;4px;5px;6px;7px;8px;9px;10px;11px;12px",
@@ -440,7 +440,7 @@ namespace appBusinessFormBuilder
                                       "", "", "", "Left;Center;Right", "Top;Center;Bottom", "0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","0px;1px;2px;3px;4px;5px;6px;7px;8px","select Color from tblColors","","",""  
                                     };
 
-            string[] sDefaultValue = { "", "Yes", 
+            string[] sDefaultValue = { "", "", "Yes", 
                                        "", "", "Yes", "Light Gray", "3px",
                                        "", "", "Yes", "Light Gray", "3px", "No", "10",
                                        "", "", "Yes", "Light Gray", "3px",
@@ -462,7 +462,7 @@ namespace appBusinessFormBuilder
                                        "", "","1", "Center", "Center", "0px", "0px", "0px", "0px", "Black", "", "", ""
                                      };
 
-            string[] sOnBlur = { "ValidateSQL(this);", "", 
+            string[] sOnBlur = { "ValidateSQL(\"this.value\");", "", "", 
                                  "", "", "", "", "",
                                  "", "", "", "", "", "", "",
                                  "", "", "", "", "",
@@ -472,19 +472,19 @@ namespace appBusinessFormBuilder
                                  "", "",
                                  "", "",
                                  "", "",
-                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "CheckRadioItems(this)", "CheckRadioItems(this)", "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);","ValidateMacro(this);","ValidateMacro(this);",
-                                 "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","ValidateMacro(this);",
-                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);",
-                                 "", "", "", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(this);",
-                                 "", "CheckFileExits(this.value)", "CheckColumnSpan(this);", "", "", "", "", "", "", "", "ValidateMacro(this);", "ValidateMacro(this);", "ValidateMacro(this);"
+                                 "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                                 "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");",
+                                 "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");",
+                                 "", "ValidateSQLDropDown(\"this.value\");", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");",
+                                 "", "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");",
+                                 "", "", "CheckRadioItems(\"this.value\")", "CheckRadioItems(\"this.value\")", "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");","ValidateMacro(\"this.value\");",
+                                 "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","ValidateMacro(\"this.value\");",
+                                 "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");",
+                                 "", "", "", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");",
+                                 "", "CheckFileExits(\"this.value.value\")", "CheckColumnSpan(this.value);", "", "", "", "", "", "", "", "ValidateMacro(\"this.value\");", "ValidateMacro(\"this.value\");", "ValidateMacro(\"this.value\");"
                                 };
 
-            string[] sExtraButton = {"OpenSQLManager(this);", "", 
+            string[] sExtraButton = {"OpenSQLManager(this);", "", "", 
                                      "", "", "", "", "",
                                      "", "", "", "", "", "", "",
                                      "", "", "", "", "",
@@ -748,9 +748,9 @@ namespace appBusinessFormBuilder
                             if (iSectionType == (int)SectionType.Form)
                             {
                                 sSQL += "UNION ALL " +
-                                        "Select -99, 'FormName', 'Name', " + (int)ItemType.Label + ",Name, '', 'ValidateFormName(this)', '',-99 from " + sTableNames[0] + " where Id = " + iFormId + " " +
+                                        "Select -99, 'FormName', 'Name', " + (int)ItemType.TextBox + ",Name, '', 'ValidateFormName(\"this.value\")', '',-99 from " + sTableNames[0] + " where Id = " + iFormId + " " +
                                         "UNION ALL " +
-                                        "Select -98, 'FormDescription', 'Description', " + (int)ItemType.TextArea + ",Description, '', 'ValidateFormName(this)', '', -98 from " + sTableNames[0] + " where Id = " + iFormId + " ";
+                                        "Select -98, 'FormDescription', 'Description', " + (int)ItemType.TextArea + ",Description, '', '', '', -98 from " + sTableNames[0] + " where Id = " + iFormId + " ";
                             }
 
                             sSQL += "Order by SortOrder";
@@ -1594,6 +1594,31 @@ namespace appBusinessFormBuilder
 
             }
 
+            public bool FormNameExists(int iFormId, string sFormName, ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "Name";
+                sSQL = "select Name from " + sTableNames[0] + " where Id <> " + iFormId + " and Name = '" + sFormName + "'";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+            }
+
             public int GetVersion(string sDeviceId, int iDebugging)
             {
                 string sSQL;
@@ -1659,12 +1684,67 @@ namespace appBusinessFormBuilder
                 }
             }
 
+            public ArrayList GetUserTables(ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "TableName";
+                sSQL = "select TableName from " + sTableNames[10];
+                ArrayList rtnArray = new ArrayList();
+                int i;
+
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return rtnArray;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return rtnArray;
+                    }
+                    else
+                    {
+                        for (i = 0; i<ds.Tables[0].Rows.Count; i++)
+                        {
+                            rtnArray.Add(ds.Tables[0].Rows[i].ItemArray[0].ToString());
+                        }
+                        return rtnArray;
+                    }
+                }
+            }
+
             public bool UserTableExists(string sUserTableName, ref string sRtnMsg)
             {
                 string sSQL;
                 string[] sColNames = new string[1];
                 sColNames[0] = "TableName";
                 sSQL = "select TableName from " + sTableNames[10] + " where TableName = '" + sUserTableName + "'";
+                DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
+                if (ds.Tables.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count <= 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            public bool UserTablesExist(ref string sRtnMsg)
+            {
+                string sSQL;
+                string[] sColNames = new string[1];
+                sColNames[0] = "TableName";
+                sSQL = "select TableName from " + sTableNames[10];
                 DataSet ds = DB.ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
                 if (ds.Tables.Count <= 0)
                 {
@@ -1769,7 +1849,14 @@ namespace appBusinessFormBuilder
 
                     for (i = 0; i < sTypes.Length; i++)
                     {
-                        sCols += "[" + sColumns[i] + "] " + sTypes[i] + " COLLATE NOCASE,";
+                        if (sTypes[i].Contains("nvarchar"))
+                        {
+                            sCols += "[" + sColumns[i] + "] " + sTypes[i] + " COLLATE NOCASE,";
+                        }
+                        else
+                        {
+                            sCols += "[" + sColumns[i] + "] " + sTypes[i] + ",";
+                        }
                     }
 
                     sCols = sCols.Substring(0, sCols.Length - 1) + ");";
@@ -2041,6 +2128,21 @@ namespace appBusinessFormBuilder
             }
         }
 
+        public bool CheckSQLSyntax(string sSQL, ref string sRtnMsg)
+        {
+            if (sSQL.Trim() == "")
+            {
+                return true;
+            }
+            else
+            {
+                sSQL = "explain " + sSQL;
+                //There could be a whole bunch of lines though separated by ;'s
+                sSQL = sSQL.Replace(";", "; explain ");
+                return ExecuteSQL(sSQL, ref sRtnMsg);
+            }
+        }
+
         public bool ExecuteSQL(string sSQL, ref string sRtnMsg)
         {
             try
@@ -2212,26 +2314,29 @@ namespace appBusinessFormBuilder
                 }
 
                 DataSet ds = ReadSQLDataSet(sSQL, sColNames, ref sRtnMsg);
-                if (ds.Tables.Count > 0)
+                if (ds != null)
                 {
-                    if (ds.Tables[0].Rows.Count > 0)
+                    if (ds.Tables.Count > 0)
                     {
                         rtnArray.Add(arrColNames);
-
-                        for (i = 0; i < ds.Tables[0].Rows.Count; i++)
+                        if (ds.Tables[0].Rows.Count > 0)
                         {
-                            ArrayList arrValues = new ArrayList();
-                            for (j = 0; j < ds.Tables[0].Columns.Count; j++)
+
+                            for (i = 0; i < ds.Tables[0].Rows.Count; i++)
                             {
-                                arrValues.Add(ds.Tables[0].Rows[i].ItemArray[j]);
+                                ArrayList arrValues = new ArrayList();
+                                for (j = 0; j < ds.Tables[0].Columns.Count; j++)
+                                {
+                                    arrValues.Add(ds.Tables[0].Rows[i].ItemArray[j]);
+                                }
+
+                                arrRowValue.Add(arrValues);
                             }
 
-                            arrRowValue.Add(arrValues);
+                            rtnArray.Add(arrRowValue);
                         }
 
-                        rtnArray.Add(arrRowValue);
                     }
-
                 }
             }
 
